@@ -10,20 +10,22 @@ source:
   sha256: cfe7956602d8bbc142a07bcb259e0d1d939f96d7b074e00dceea3cb5e39244e8
 
 build:
-  number: 0
+  number: 1
   noarch: python
   script: "{{ PYTHON }} -m pip install . -vv"
 
 requirements:
   host:
     - pip
-    - python
+    - python {{ python_min }}
     - setuptools
   run:
-    - python
+    - python >={{ python_min }}
     - setuptools
 
 test:
+  requires:
+    - python {{ python_min }}
   imports:
     - pokrok
     - pokrok.plugins
